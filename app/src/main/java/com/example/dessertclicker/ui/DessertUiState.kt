@@ -7,5 +7,5 @@ data class DessertUiState(
     val dessertsSold: Int = 0,
     val currentDessertIndex: Int = 0,
     val currentDessertPrice: Int = 0,
-    val currentDessertImageId: Int = R.drawable.cupcake,
+    val currentDessertImageId: Int = 0,
 )

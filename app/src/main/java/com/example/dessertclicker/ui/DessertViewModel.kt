@@ -18,6 +18,18 @@ class DessertViewModel : ViewModel() {
 
     val allDesserts: List<Dessert> = Datasource.dessertList
 
+
+    init {
+        initializeDessert()
+    }
+
+    private fun initializeDessert() {
+        _uiState.value = DessertUiState(
+            currentDessertPrice = allDesserts[0].price,
+            currentDessertImageId = allDesserts[0].imageId
+        )
+    }
+
     /**
      * Determine which dessert to show.
      */
@@ -40,10 +52,10 @@ class DessertViewModel : ViewModel() {
     }
 
     fun updateAndShowNextDessert() {  // Update the revenue
-        val dessertToShow = determineDessertToShow(_uiState.value.dessertsSold)
+        val dessertToShow = determineDessertToShow(_uiState.value.dessertsSold+1)
         _uiState.update { currentState ->
             currentState.copy(
-                revenue = currentState.currentDessertPrice,
+                revenue = currentState.revenue + currentState.currentDessertPrice,
                 dessertsSold = currentState.dessertsSold + 1,
                 currentDessertImageId = dessertToShow.imageId,
                 currentDessertPrice = dessertToShow.price
